@@ -7,14 +7,7 @@ USER root
 
 WORKDIR /usr/app
 
-COPY ["package.json", "package-lock.json", "app.js", "./"]
-COPY ./bin ./bin
-COPY ./models ./models
-COPY ./public ./public
-COPY ./routes ./routes
-COPY ./tasks ./tasks
-COPY ./utils ./utils
-COPY ./views ./views
+COPY ./ ./
 
 RUN npm install --only=production \
     && groupadd -g 1001 ${GROUP} \
@@ -26,4 +19,4 @@ USER ${USER}:${GROUP}
 
 EXPOSE 3000
 
-CMD [ "node", "./bin/start" ]
+CMD [ "node", "./app.js" ]
